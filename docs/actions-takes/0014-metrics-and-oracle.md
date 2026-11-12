@@ -89,3 +89,47 @@ Valid comparison: oracle vs heuristic, same setup. Oracle better on average, not
 ### Analogy
 
 Perfect answer key to student who studies 30 minutes with random guessing. Key correct. Score low.
+
+## Why a perfect label is not a perfect potential
+
+Three objects:
+
+1. Ground-truth label: is timestamp t anomalous?
+2. Potential / severity hint: reward input.
+3. Learned policy: scored by F1.
+
+Oracle is perfect at (1), not necessarily good at (2). F1 scores (3).
+
+Binary oracle on A1:
+
+- Anomaly rate 1.76%.
+- `phi=1` ~1.76% of windows, `phi=0` ~98.24%.
+- Shaping term `gamma*phi(s') - phi(s)` is zero on most steps.
+- Nonzero only at boundaries, as ±0.96 jumps.
+- Almost silent. Huge discontinuous deltas.
+
+Graded LLM:
+
+- Scores vary widely.
+- Shaping term nonzero on most steps.
+- Smaller, smoother deltas.
+- Dense guidance.
+
+80% correct dense guidance can beat 100% correct sparse guidance.
+
+Other reasons:
+
+- Perfect label is not a value function. PBRS prefers smooth state value.
+- Timing: oracle marks point; graded hint can anticipate.
+- Exploration: sparse hard signals can destabilize; smooth hints balance.
+- Finite training: PBRS preserves optimal policy, no guaranteed speedup.
+- Variance ~0.10 F1. Single-run comparisons meaningless.
+
+What we know:
+
+- No working real LLM run here. Base EOS, Instruct code.
+- README 0.7413 from authors' environment. Not controlled comparison.
+- Local controlled test: oracle 0.1716 > heuristic 0.0687.
+- Noise cannot add 0.57 F1 when perfect hint gives 0.17.
+
+One sentence: oracle perfect at labeling, F1 measures learning. Sparse perfect hint can be less useful than dense imperfect hint.
