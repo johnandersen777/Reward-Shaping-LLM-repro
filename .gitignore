@@ -11,3 +11,4 @@ __pycache__/
 src/
 tools/
 llama-cuda12libs/
+notes.md
