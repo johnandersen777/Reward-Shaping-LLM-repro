@@ -2,6 +2,7 @@
 .venv38/
 run/
 env/fakehome/
+env/instructhome/
 mock_llm/*.jsonl
 mock_llm/oracle_lookup.pkl
 *.log
