@@ -5,6 +5,7 @@ It is NOT Llama and must never be used to claim reproduction numbers.
 Every request/response is appended to mock_llm/requests.jsonl.
 """
 
+import hashlib
 import json
 import math
 import os
@@ -23,6 +24,8 @@ LOG_PATH = os.environ.get(
     os.path.join(os.path.dirname(os.path.abspath(__file__)), "requests.jsonl"),
 )
 MODE = os.environ.get("MOCK_MODE", "heuristic")
+ORACLE_FLIP_RATE = float(os.environ.get("ORACLE_FLIP_RATE", "0"))
+ORACLE_NOISE_SEED = os.environ.get("ORACLE_NOISE_SEED", "0")
 LLAMA_CPP_URL = os.environ.get("LLAMA_CPP_URL", "http://127.0.0.1:8770").rstrip("/")
 ORACLE_PATH = os.environ.get(
     "ORACLE_LOOKUP",
@@ -32,7 +35,7 @@ SEQ_RE = re.compile(r"Sequence:\s*\[([^\]]*)\]")
 NUM_RE = re.compile(r"[-+]?\d*\.?\d+(?:[eE][-+]?\d+)?")
 
 _ORACLE = None
-if MODE == "oracle":
+if MODE in ("oracle", "noisy_oracle"):
     with open(ORACLE_PATH, "rb") as _fh:
         _ORACLE = pickle.load(_fh)
 
@@ -58,6 +61,22 @@ def mock_severity(values):
     score = 0.05 + 0.18 * zmax
     score = max(0.0, min(0.95, score))
     return round(score, 2)
+
+
+def _hash_unit(text, salt):
+    digest = hashlib.sha256(
+        (ORACLE_NOISE_SEED + "|" + salt + "|" + text).encode("utf-8")
+    ).digest()
+    return int.from_bytes(digest[:8], "big") / float(2 ** 64)
+
+
+def noisy_oracle_severity(text, label):
+    """Graded severity. Wrong with prob ORACLE_FLIP_RATE, always JSON-ready."""
+    wrong = _hash_unit(text, "flip") < ORACLE_FLIP_RATE
+    u = _hash_unit(text, "value")
+    positive = (label >= 0.5) != wrong
+    severity = 0.75 + 0.25 * u if positive else 0.25 * u
+    return round(float(severity), 2), wrong
 
 
 def log_record(record):
@@ -109,10 +128,22 @@ async def chat_completions(request: Request):
     hit = None
     severity = None
     backend_ms = None
+    flipped = None
     if MODE == "llama_cpp":
         t0 = time.time()
         content, backend = call_llama_cpp(messages)
         backend_ms = round((time.time() - t0) * 1000.0, 1)
+    elif MODE == "noisy_oracle":
+        text = canonical_sequence(prompt)
+        if text in _ORACLE:
+            label = float(_ORACLE[text])
+            hit = True
+            severity, flipped = noisy_oracle_severity(text, label)
+        else:
+            severity = mock_severity(values)
+            hit = False
+        content = json.dumps({"severity": severity})
+        backend = None
     else:
         if MODE == "oracle":
             text = canonical_sequence(prompt)
@@ -132,6 +163,8 @@ async def chat_completions(request: Request):
             "ts": time.time(),
             "mode": MODE,
             "hit": hit,
+            "flipped": flipped,
+            "flip_rate": ORACLE_FLIP_RATE,
             "model": body.get("model"),
             "n_values": len(values),
             "max_abs": max((abs(v) for v in values), default=None),

@@ -15,3 +15,4 @@
 - [0013 Oracle Baseline](0013-oracle-baseline.md)
 - [0014 Metrics And Oracle](0014-metrics-and-oracle.md)
 - [0015 Bonsai MTP Q8](0015-bonsai-mtp-q8.md)
+- [0016 Noisy Oracle Curve](0016-noisy-oracle-curve.md)
