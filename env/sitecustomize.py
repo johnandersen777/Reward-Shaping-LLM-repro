@@ -63,6 +63,37 @@ if _os.environ.get("RSL_PRELOAD_TORCH") == "1":
         pass
 
 
+# Optional deterministic seed. Enabled only when RSL_SEED is set.
+_seed_env = _os.environ.get("RSL_SEED")
+if _seed_env:
+    try:
+        import random as _random
+        import numpy as _np
+
+        _seed_value = int(_seed_env)
+        _random.seed(_seed_value)
+        _np.random.seed(_seed_value)
+
+        import builtins as _builtins
+
+        _real_import = _builtins.__import__
+        _tf_seeded = [False]
+
+        def _seed_tensorflow_import(name, *args, **kwargs):
+            module = _real_import(name, *args, **kwargs)
+            if not _tf_seeded[0] and name == "tensorflow":
+                try:
+                    module.compat.v1.set_random_seed(_seed_value)
+                    _tf_seeded[0] = True
+                except Exception:
+                    pass
+            return module
+
+        _builtins.__import__ = _seed_tensorflow_import
+    except Exception:
+        pass
+
+
 # Optional raw-window mode: feed min-max values to the LLM judge instead of
 # z-scores. Enabled only when RSL_RAW_WINDOWS=1. Patches llm_shaping after its
 # import/reload; no paper code is edited.
