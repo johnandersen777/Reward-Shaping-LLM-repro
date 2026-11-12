@@ -27,3 +27,4 @@
 - [0026 Checkpointing And Reload](0026-checkpointing-and-reload.md)
 - [0027 Training Budget Grid](0027-training-budget-grid.md)
 - [0028 Budget B Result](0028-budget-b-result.md)
+- [0029 Budget C Result](0029-budget-c-result.md)
