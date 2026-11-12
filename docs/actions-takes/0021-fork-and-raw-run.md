@@ -8,19 +8,18 @@ Paper repo fork:
 https://github.com/johnandersen777/Reward-Shaping-LLM
 ```
 
-Branch: `repro-setup`. Head `691b8b8`. Pushed. No upstream PR. No upstream issue.
+Branch: `repro-setup`. Head `691b8b8`. Pushed. Kept unused.
 
 Contains one doc commit: `REPRO_SETUP.md` linking parent repo. No paper code edits.
 
-Parent submodule pointer updated to `691b8b8`.
-
-`.gitmodules` URL updated to fork:
+Parent submodule reverted to upstream:
 
 ```text
-https://github.com/johnandersen777/Reward-Shaping-LLM.git
+gitlink 2e00998
+url https://github.com/baharehgl/Reward-Shaping-LLM.git
 ```
 
-Parent commit: `b3d8ab3`. Submodule status: `691b8b8 (heads/repro-setup)`.
+Parent commit: `5732d57`.
 
 Parent repro repo:
 
