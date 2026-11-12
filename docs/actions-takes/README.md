@@ -9,3 +9,4 @@
 - [0007 Real Llama](0007-real-llama.md)
 - [0008 Historical Artifacts](0008-historical-artifacts.md)
 - [0009 Git Workflow](0009-git-workflow.md)
+- [0010 Base Llama EOS](0010-base-llama-eos.md)
