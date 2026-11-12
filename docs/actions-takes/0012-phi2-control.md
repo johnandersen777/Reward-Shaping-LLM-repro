@@ -49,6 +49,17 @@ ETA: 6-16 h. About 4,600 cached generations. 5-15 s per call on 4 GB GPU split. 
 
 Status: running. Results pending.
 
+## Smoke Test
+
+Seen:
+
+```text
+SMOKE TEST shaped rewards: [-0.038, -0.038] [-0.038, -0.038]
+llm_logs: phi(s)=0.95, phi(s2)=0.95
+```
+
+`0.96*0.95 - 0.95 = -0.038`. Matches. Phi numeric path works. Warm-up started.
+
 ## GPU Split
 
 Phi-2 2.7B fp16 ~5.4 GB. GPU 4 GB. `device_map="auto"` splits GPU/CPU. CPU layers dominate latency.
