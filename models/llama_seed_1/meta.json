@@ -1,0 +1,42 @@
+{
+  "cwd": "/home/baptist777/.tmp/tmp.VjJfPBPNr4",
+  "end_time_utc": "2026-11-12T09:43:02.603330Z",
+  "env": {
+    "LLM_CHOICE": null,
+    "OMP_NUM_THREADS": "8",
+    "OPENAI_BASE_URL": null,
+    "PYTHONHASHSEED": "0",
+    "RSL_RAW_WINDOWS": "1",
+    "RSL_SEED": "1"
+  },
+  "exit_code": 0,
+  "host": "hat-7",
+  "paper_git_head": "2e009980398b797ae7acefc7497ab5e368673783",
+  "parent_git_head": "44e5f94c11c8402821071a7694f23e8c53bc3296",
+  "proxy_health": {
+    "backend": "http://127.0.0.1:8770",
+    "log": "/home/baptist777/.tmp/tmp.VjJfPBPNr4/mock_llm/remote_llama_instruct_system.jsonl",
+    "mode": "remote_openai",
+    "remote": "http://192.168.0.20:8001/v1",
+    "remote_api_key_set": false,
+    "remote_mode": "chat",
+    "remote_model": "llama-3.2-3b-instruct",
+    "remote_system_prompt": "You are an anomaly severity judge. Return ONLY JSON {\"severity\": s} with s in [0.0,1.0]. Never write code.",
+    "status": "ok"
+  },
+  "seed": 1,
+  "start_time_utc": "2026-11-12T09:23:51.482341Z",
+  "versions": {
+    "accelerate": "0.34.2",
+    "fastapi": "0.115.6",
+    "numpy": "1.24.3",
+    "openai": "1.54.4",
+    "pandas": "2.0.3",
+    "scikit-learn": "1.3.2",
+    "scipy": "1.10.1",
+    "tensorflow-cpu": "2.13.1",
+    "torch": "2.4.1+cu118",
+    "transformers": "4.46.3",
+    "uvicorn": "0.32.1"
+  }
+}
