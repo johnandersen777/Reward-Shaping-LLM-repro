@@ -1,0 +1,9 @@
+.venv/
+.venv38/
+run/
+env/fakehome/
+mock_llm/*.jsonl
+mock_llm/oracle_lookup.pkl
+*.log
+*.swp
+__pycache__/
