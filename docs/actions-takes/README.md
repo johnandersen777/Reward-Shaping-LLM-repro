@@ -13,3 +13,4 @@
 - [0011 Llama Prompt Incompatibility](0011-llama-prompt-incompatibility.md)
 - [0012 Phi-2 Control](0012-phi2-control.md)
 - [0013 Oracle Baseline](0013-oracle-baseline.md)
+- [0014 Metrics And Oracle](0014-metrics-and-oracle.md)
