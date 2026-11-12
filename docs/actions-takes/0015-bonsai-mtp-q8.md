@@ -111,20 +111,60 @@ cd /home/baptist777/.tmp/tmp.VjJfPBPNr4
 env/run_real_a1_bonsai.sh > /home/baptist777/.tmp/tmp.VjJfPBPNr4/run/A1_bonsai/run.log 2>&1
 ```
 
-Status: running. Results pending.
+## Full A1 Result
 
-## Smoke Test
+Run exit 0. Average F1 = 0.009376.
 
-Seen:
+Per-episode F1:
 
 ```text
-SMOKE TEST shaped rewards: [-0.03, -0.03] [-0.03, -0.03]
-llm_logs: phi(s)=0.75, phi(s2)=0.75
+0.01033 0.00585 0.00288 0.02120 0.00750 0.00849
 ```
 
-`0.96*0.75 - 0.75 = -0.03`. Matches. Warm-up started.
+Paper Llama A1 F1 = 0.7413. Not reproduced.
 
-Backend latency: mean 641 ms over first calls.
+## Phi Distribution
+
+5,322 unique logged windows:
+
+```text
+0.75  3377
+0.95  1027
+0.70   835
+0.00    32
+0.50    28
+0.85    22
+0.55     1
+```
+
+~88% scored >= 0.70. Judge over-flags normal windows. Little discrimination. High, near-constant phi gives weak reward differences.
+
+## Cache-Reuse Test
+
+Fixed 20-prompt benchmark, cold server each time.
+
+```text
+default         wall 562.3 ms  prompt 446.6 ms  predict 113.0 ms
+CACHE_REUSE=256 wall 564.0 ms  prompt 447.8 ms  predict 113.4 ms
+```
+
+Outputs identical. Cached tokens reported 0 in both. No gain. Keep default server flags.
+
+Bench files:
+
+```text
+docs/actions-takes/bonsai_bench_before.json
+docs/actions-takes/bonsai_bench_cache256.json
+env/bench_bonsai.py
+```
+
+Command:
+
+```bash
+cd /home/baptist777/.tmp/tmp.VjJfPBPNr4
+env PYTHONPATH=$PWD/run/A1_winorder/repo \
+  .venv38/bin/python env/bench_bonsai.py docs/actions-takes/bonsai_bench_before.json
+```
 
 ## Experiment Change
 

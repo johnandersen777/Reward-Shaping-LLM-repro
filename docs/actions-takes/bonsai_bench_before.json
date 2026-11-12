@@ -1,0 +1,202 @@
+[
+  {
+    "i": 0,
+    "wall_ms": 641.28,
+    "content": "{\"severity\": 0.75}",
+    "prompt_n": 364,
+    "prompt_ms": 532.144,
+    "predicted_n": 10,
+    "predicted_ms": 105.331,
+    "cached_tokens": 0
+  },
+  {
+    "i": 1,
+    "wall_ms": 545.05,
+    "content": "{\"severity\": 0.95}",
+    "prompt_n": 364,
+    "prompt_ms": 438.518,
+    "predicted_n": 10,
+    "predicted_ms": 103.687,
+    "cached_tokens": 0
+  },
+  {
+    "i": 2,
+    "wall_ms": 581.63,
+    "content": "{\"severity\": 0.70}",
+    "prompt_n": 364,
+    "prompt_ms": 441.507,
+    "predicted_n": 10,
+    "predicted_ms": 137.269,
+    "cached_tokens": 0
+  },
+  {
+    "i": 3,
+    "wall_ms": 544.67,
+    "content": "{\"severity\": 0.95}",
+    "prompt_n": 364,
+    "prompt_ms": 438.09,
+    "predicted_n": 10,
+    "predicted_ms": 103.812,
+    "cached_tokens": 0
+  },
+  {
+    "i": 4,
+    "wall_ms": 581.51,
+    "content": "{\"severity\": 0.70}",
+    "prompt_n": 364,
+    "prompt_ms": 441.361,
+    "predicted_n": 10,
+    "predicted_ms": 137.474,
+    "cached_tokens": 0
+  },
+  {
+    "i": 5,
+    "wall_ms": 546.58,
+    "content": "{\"severity\": 0.75}",
+    "prompt_n": 364,
+    "prompt_ms": 439.184,
+    "predicted_n": 10,
+    "predicted_ms": 104.627,
+    "cached_tokens": 0
+  },
+  {
+    "i": 6,
+    "wall_ms": 548.6,
+    "content": "{\"severity\": 0.75}",
+    "prompt_n": 364,
+    "prompt_ms": 441.213,
+    "predicted_n": 10,
+    "predicted_ms": 104.59,
+    "cached_tokens": 0
+  },
+  {
+    "i": 7,
+    "wall_ms": 547.74,
+    "content": "{\"severity\": 0.75}",
+    "prompt_n": 364,
+    "prompt_ms": 440.626,
+    "predicted_n": 10,
+    "predicted_ms": 104.323,
+    "cached_tokens": 0
+  },
+  {
+    "i": 8,
+    "wall_ms": 548.33,
+    "content": "{\"severity\": 0.75}",
+    "prompt_n": 364,
+    "prompt_ms": 440.827,
+    "predicted_n": 10,
+    "predicted_ms": 104.766,
+    "cached_tokens": 0
+  },
+  {
+    "i": 9,
+    "wall_ms": 583.33,
+    "content": "{\"severity\": 0.70}",
+    "prompt_n": 364,
+    "prompt_ms": 443.515,
+    "predicted_n": 10,
+    "predicted_ms": 137.051,
+    "cached_tokens": 0
+  },
+  {
+    "i": 10,
+    "wall_ms": 550.15,
+    "content": "{\"severity\": 0.50}",
+    "prompt_n": 364,
+    "prompt_ms": 442.732,
+    "predicted_n": 10,
+    "predicted_ms": 104.721,
+    "cached_tokens": 0
+  },
+  {
+    "i": 11,
+    "wall_ms": 550.44,
+    "content": "{\"severity\": 0.75}",
+    "prompt_n": 364,
+    "prompt_ms": 442.716,
+    "predicted_n": 10,
+    "predicted_ms": 105.006,
+    "cached_tokens": 0
+  },
+  {
+    "i": 12,
+    "wall_ms": 551.22,
+    "content": "{\"severity\": 0.75}",
+    "prompt_n": 364,
+    "prompt_ms": 443.677,
+    "predicted_n": 10,
+    "predicted_ms": 104.813,
+    "cached_tokens": 0
+  },
+  {
+    "i": 13,
+    "wall_ms": 549.52,
+    "content": "{\"severity\": 0.75}",
+    "prompt_n": 364,
+    "prompt_ms": 441.987,
+    "predicted_n": 10,
+    "predicted_ms": 104.778,
+    "cached_tokens": 0
+  },
+  {
+    "i": 14,
+    "wall_ms": 551.21,
+    "content": "{\"severity\": 0.75}",
+    "prompt_n": 364,
+    "prompt_ms": 443.723,
+    "predicted_n": 10,
+    "predicted_ms": 104.784,
+    "cached_tokens": 0
+  },
+  {
+    "i": 15,
+    "wall_ms": 584.54,
+    "content": "{\"severity\": 0.70}",
+    "prompt_n": 364,
+    "prompt_ms": 443.11,
+    "predicted_n": 10,
+    "predicted_ms": 138.762,
+    "cached_tokens": 0
+  },
+  {
+    "i": 16,
+    "wall_ms": 551.49,
+    "content": "{\"severity\": 0.75}",
+    "prompt_n": 364,
+    "prompt_ms": 443.474,
+    "predicted_n": 10,
+    "predicted_ms": 105.302,
+    "cached_tokens": 0
+  },
+  {
+    "i": 17,
+    "wall_ms": 585.57,
+    "content": "{\"severity\": 0.70}",
+    "prompt_n": 364,
+    "prompt_ms": 444.798,
+    "predicted_n": 10,
+    "predicted_ms": 138.246,
+    "cached_tokens": 0
+  },
+  {
+    "i": 18,
+    "wall_ms": 552.38,
+    "content": "{\"severity\": 0.75}",
+    "prompt_n": 364,
+    "prompt_ms": 444.939,
+    "predicted_n": 10,
+    "predicted_ms": 104.786,
+    "cached_tokens": 0
+  },
+  {
+    "i": 19,
+    "wall_ms": 551.18,
+    "content": "{\"severity\": 0.75}",
+    "prompt_n": 364,
+    "prompt_ms": 443.063,
+    "predicted_n": 10,
+    "predicted_ms": 105.388,
+    "cached_tokens": 0
+  }
+]
