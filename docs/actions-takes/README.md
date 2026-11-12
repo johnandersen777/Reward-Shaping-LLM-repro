@@ -22,3 +22,4 @@
 - [0021 Fork And Raw-Scale Run](0021-fork-and-raw-run.md)
 - [0022 Remote Llama Raw Result](0022-remote-llama-raw-result.md)
 - [0023 Remote Llama F1 Report](0023-remote-llama-f1-report.md)
+- [0024 Paper Comparison](0024-paper-comparison.md)
