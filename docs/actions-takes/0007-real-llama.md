@@ -72,6 +72,34 @@ env CUDA_VISIBLE_DEVICES= \
 
 Status: background. Result pending.
 
+## Instruct Checkpoint
+
+README names `llama-3.2-3b-instruct`. Base checkpoint emits empty text. Access probe for Instruct: 200.
+
+Download:
+
+```bash
+/home/baptist777/.tmp/tmp.VjJfPBPNr4/env/download_llama32_3b_instruct.sh
+```
+
+Path: `~/llama-models/Llama-3.2-3B-Instruct`. Size 6.0G.
+
+Fake HOME maps hardcoded path to Instruct:
+
+```bash
+mkdir -p /home/baptist777/.tmp/tmp.VjJfPBPNr4/env/instructhome/llama-models
+ln -sfn /home/baptist777/llama-models/Llama-3.2-3B-Instruct \
+  /home/baptist777/.tmp/tmp.VjJfPBPNr4/env/instructhome/llama-models/Llama-3.2-3B
+```
+
+Canary:
+
+```bash
+/home/baptist777/.tmp/tmp.VjJfPBPNr4/env/check_instruct.sh
+```
+
+Status: pending.
+
 ## Next
 
 If CPU nonempty: offload causes empty. If CPU empty: model or pipeline. Then inspect token ids, EOS handling, `return_full_text`, generation defaults.

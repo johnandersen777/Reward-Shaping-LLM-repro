@@ -59,4 +59,4 @@ cd /home/baptist777/.tmp/tmp.VjJfPBPNr4
 .venv38/bin/python env/summarize_mock_suite.py
 ```
 
-Status: suite running. Results pending.
+Status seen: h1 22:09, h2 22:12, h3 22:15, h4 22:17. Oracle runs pending. Results pending.

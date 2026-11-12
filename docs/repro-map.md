@@ -18,9 +18,11 @@ Paper target: Table II, Yahoo-A1 and SMD, Llama-3.2-3B rows.
   on CPU fp16: model loads through `device_map="auto"`, generation runs,
   parsing behaves as coded. CPU fp16 works, so accelerate CPU offload for the
   3B model should work.
-- Real Llama-3.2-3B download is blocked: HF token account `baptist777001`
-  is not authorized for gated repo `meta-llama/Llama-3.2-3B` (HTTP 403).
-  User must accept the license on the model page.
+- Real Llama-3.2-3B access granted and downloaded (6.0 GB, exact shard
+  sizes). Base checkpoint loads on GPU/CPU offload but returns empty text, so
+  the z-score fallback fires. Same failure in the authors' committed Llama
+  exp artifacts (`aa387de`, mean F1 0.0269). Debug and Instruct fallback
+  underway. See `docs/actions-takes/0007-real-llama.md` and `0008-historical-artifacts.md`.
 
 ## Environment
 
