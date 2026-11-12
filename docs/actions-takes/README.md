@@ -11,3 +11,4 @@
 - [0009 Git Workflow](0009-git-workflow.md)
 - [0010 Base Llama EOS](0010-base-llama-eos.md)
 - [0011 Llama Prompt Incompatibility](0011-llama-prompt-incompatibility.md)
+- [0012 Phi-2 Control](0012-phi2-control.md)
