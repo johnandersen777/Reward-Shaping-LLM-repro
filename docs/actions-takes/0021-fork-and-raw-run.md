@@ -86,4 +86,4 @@ RSL_RAW_WINDOWS=1 env/run_real_a1_remote.sh \
 
 Proxy: `192.168.0.20:8001/v1`, chat, system JSON instruction.
 
-Status: running. Results pending. Wrapper and input-scale changes; user-directed. Not paper code path.
+Status: done. Average F1 0.403282. See `0022-remote-llama-raw-result.md`.

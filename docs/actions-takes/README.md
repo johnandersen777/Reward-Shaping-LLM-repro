@@ -20,3 +20,4 @@
 - [0019 Remote Llama Tests](0019-remote-llama-tests.md)
 - [0020 Llama Judge Calibration](0020-llama-judge-calibration.md)
 - [0021 Fork And Raw-Scale Run](0021-fork-and-raw-run.md)
+- [0022 Remote Llama Raw Result](0022-remote-llama-raw-result.md)
