@@ -33,30 +33,37 @@ Phi-2 sometimes emits JSON. Zeros window emits code text, parsed 0.0, no fallbac
 
 ## Full A1 Run
 
-Actual run path: `run/A1_winorder/repo`. The runner defaults there. Log at `run/A1_phi2/run.log`. Fresh-copy `run/A1_phi2/repo` exists but was not used because the default path won. No code issue; path only.
-
-Started after oracle suite. Background. Monitor set.
-
-```bash
-cd /home/baptist777/.tmp/tmp.VjJfPBPNr4
-env/run_real_a1_phi2.sh /home/baptist777/.tmp/tmp.VjJfPBPNr4/run/A1_phi2/repo \
-  > /home/baptist777/.tmp/tmp.VjJfPBPNr4/run/A1_phi2/run.log 2>&1
-```
-
-Use explicit repo argument next time. Current outputs land in:
-
-```text
-run/A1_winorder/repo/exp/A1_LP200_AL1000_d0.96/
-run/A1_winorder/repo/vae_model.h5
-```
+Runner default now: `run/A1_phi2/repo`. Threads set to 12. Restarted 22:45 after stopping single-thread run.
 
 Log: `run/A1_phi2/run.log`.
 
+```bash
+cd /home/baptist777/.tmp/tmp.VjJfPBPNr4
+env/run_real_a1_phi2.sh > /home/baptist777/.tmp/tmp.VjJfPBPNr4/run/A1_phi2/run.log 2>&1
+```
+
+Thread env in runner:
+
+```bash
+export OMP_NUM_THREADS=12
+export MKL_NUM_THREADS=12
+export OPENBLAS_NUM_THREADS=12
+export NUMEXPR_NUM_THREADS=12
+export TOKENIZERS_PARALLELISM=false
+```
+
+Reason: prior phi process used ~1 CPU core. 12 cores available.
+
+Outputs:
+
+```text
+run/A1_phi2/repo/exp/A1_LP200_AL1000_d0.96/
+run/A1_phi2/repo/vae_model.h5
+```
+
 Target paper Phi A1 F1: 0.5555. Historical Phi exp mean: 0.3107.
 
-ETA: 6-16 h. About 4,600 cached generations. 5-15 s per call on 4 GB GPU split.
-
-Status: warm-up running. VAE saved at 22:36. Exp dir created 22:37.
+Status: running. Results pending.
 
 ## Smoke Test
 
