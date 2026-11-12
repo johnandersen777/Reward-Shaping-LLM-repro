@@ -15,11 +15,14 @@ rsync -a \
   --exclude 'SMD' --exclude 'KPI_data' --exclude 'Figure' --exclude '.idea' \
   "$SRC/" "$DST/repo/"
 
+"$ROOT/.venv38/bin/python" "$ROOT/env/instrument_checkpoint.py" "$DST/repo/myasp-A1.py"
+
 find "$DATA" -maxdepth 1 -name '*.csv' -print0 | sort -z | xargs -0 sha256sum \
   > "$DST/data_manifest.sha256"
 
 export RSL_SEED="$SEED"
 export RSL_RAW_WINDOWS=1
+export RSL_TEST=0
 export PYTHONHASHSEED=0
 export OMP_NUM_THREADS="${OMP_NUM_THREADS:-8}"
 export RSL_SEED_LOG="$DST/seed_log.json"
