@@ -60,6 +60,21 @@ run/validate_seed_<N>/performance.txt
 run/validate_seed_<N>/run.log
 ```
 
+## Reload Proof
+
+Seed 0 checkpoint reloaded with `RSL_TEST=1`.
+
+```text
+Loading model checkpoint .../checkpoints/model...
+Average F1-score over 6 episodes: 0.0324824097437398
+```
+
+Original seed 0 average: 0.0324824097437398. Exact match. Per-episode F1 also identical for all six.
+
+Artifact: `models/llama_seed_0/validation_performance.txt`.
+
+This proves save and reload work for the Q-learning agent state.
+
 ## Search Policy
 
 Seeds fixed before runs. All runs kept. Highest F1 reported as best-of-N with N and full distribution. No selected-run headline. No prompt/config tuning after seeing validation results.
