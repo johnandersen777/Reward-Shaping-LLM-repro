@@ -37,7 +37,7 @@ All oracle requests during runs hit: 2,128/2,128 at last check.
 - Fixed 3 episodes, 10 updates each, epsilon near 1. Learning ceiling low.
 - F1 variance across runs is large. Reward effect may be masked.
 
-## Current results
+## Final results
 
 Heuristic, 5 runs, fresh copy each:
 
@@ -50,13 +50,35 @@ h5 0.0000
 mean 0.0687  std 0.1120
 ```
 
-Oracle, run 1:
+Oracle, 5 runs:
 
 ```text
 o1 0.1340
+o2 0.2350
+o3 0.2988
+o4 0.1905
+o5 0.0000
+mean 0.1716  std 0.1014
 ```
 
-Oracle o2-o5 running.
+Mean difference: +0.1032.
+
+```text
+bootstrap 95% CI  [-0.0397, +0.2223]
+P(diff > 0)        0.9274
+Welch t-test p     0.2106
+Mann-Whitney p     0.1179
+```
+
+## Interpretation
+
+Direction favors oracle. Not statistically significant at n=5. Variance high. One oracle run 0.0.
+
+Both means low: 3 episodes, 30 gradient updates, epsilon near 1. Policy barely trained.
+
+This tests reward plumbing. Not paper performance.
+
+All 25,819 oracle prompts hit lookup. Zero misses.
 
 ## Phi-2 pause
 
