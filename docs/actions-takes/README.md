@@ -31,3 +31,4 @@
 - [0030 Budget Search Summary](0030-budget-search-summary.md)
 - [0031 Budget E Result](0031-budget-e-result.md)
 - [0032 Budget F Result](0032-budget-f-result.md)
+- [0033 Budget B Extended Search](0033-budget-b-extended-search.md)
