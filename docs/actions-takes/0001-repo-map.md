@@ -45,7 +45,7 @@ No `__main__` guard. Import runs full pipeline.
 
 ## Files
 
-- `REPRO_MAP.md`: full working map.
+- `docs/repro-map.md`: full working map.
 - `run/A1_mock/`: first mock run copy and output.
 - `env/`: venv, shims, runners.
 - `mock_llm/`: mock server, oracle lookup, logs.
