@@ -69,4 +69,41 @@ So shape can shift mean F1 and stability. Random run-to-run variance still comes
 
 Five runs per rate. Report mean/std. Differences under ~0.1 hard to resolve.
 
-Status: suite running. Results pending.
+## Results
+
+| Wrong rate | Mean F1 | Std | n |
+| ---: | ---: | ---: | ---: |
+| 0.00 | 0.0479 | 0.0582 | 5 |
+| 0.10 | 0.1303 | 0.0701 | 5 |
+| 0.25 | 0.0519 | 0.0661 | 5 |
+| 0.50 | 0.1239 | 0.1343 | 5 |
+| 1.00 | 0.0784 | 0.1092 | 5 |
+
+Baselines:
+
+```text
+binary oracle  0.1716 +/- 0.1014
+heuristic mock 0.0687 +/- 0.1120
+```
+
+Files:
+
+```text
+docs/actions-takes/noisy_oracle_results.csv
+docs/actions-takes/noisy_oracle_curve.svg
+```
+
+## Stats
+
+```text
+Kruskal-Wallis across 5 rates: p = 0.445
+One-way ANOVA:                 p = 0.594
+Binary oracle vs p=0.00:       Welch p = 0.076
+Binary oracle vs others:       p = 0.089-0.587
+```
+
+No significant trend. Variance dominates. Wrong rate does not explain F1 here.
+
+Binary oracle mean highest. Borderline vs graded-correct. n=5.
+
+Interpretation: graded-correct scored lower than binary oracle on average. Wrong rates 0.1-1.0 overlap. Do not claim a curve from 5 runs per rate. Consistent with weak training dominating.
