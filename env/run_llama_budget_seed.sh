@@ -60,10 +60,16 @@ meta = {
 json.dump(meta, open(os.path.join(dst,"meta.json"),"w"), indent=2, sort_keys=True)
 PY
 
+if [ "${RSL_WATCH_EPISODES:-1}" = "1" ]; then
+  nohup "$ROOT/env/watch_episode_checkpoints.sh" "$TAG" >/dev/null 2>&1 &
+  echo "$!" > "$DST/watcher.pid"
+fi
+
 set +e
 "$ROOT/env/run_real_a1_remote.sh" "$DST/repo" > "$DST/run.log" 2>&1
 RUN_CODE=$?
 set -e
+touch "$DST/DONE"
 
 PERF="$(find "$DST/repo/exp" -name '*performance.txt' -print -quit 2>/dev/null || true)"
 [ -n "$PERF" ] && cp "$PERF" "$DST/performance.txt"

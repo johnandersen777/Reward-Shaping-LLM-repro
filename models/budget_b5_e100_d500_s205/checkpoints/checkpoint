@@ -1,2 +1,2 @@
-model_checkpoint_path: "/home/baptist777/.tmp/tmp.VjJfPBPNr4/run/budget_b5_e100_d500_s205/repo/exp/A1_LP200_AL1000_d0.96/checkpoints/model"
-all_model_checkpoint_paths: "/home/baptist777/.tmp/tmp.VjJfPBPNr4/run/budget_b5_e100_d500_s205/repo/exp/A1_LP200_AL1000_d0.96/checkpoints/model"
+model_checkpoint_path: "model"
+all_model_checkpoint_paths: "model"

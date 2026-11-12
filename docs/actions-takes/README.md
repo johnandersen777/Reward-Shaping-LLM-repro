@@ -35,3 +35,4 @@
 - [0034 Full Budget Search State](0034-full-budget-search-state.md)
 - [0035 Full Paper Budget Run](0035-full-paper-budget-run.md)
 - [0036 Metric Aggregation Check](0036-metric-aggregation-check.md)
+- [0037 Per-Episode Checkpoints](0037-per-episode-checkpoints.md)

@@ -14,3 +14,6 @@ llama-cuda12libs/
 notes.md
 
 atirc
+models/*/episode_f1.csv.lock
+models/*/episodes/.failed_ep*
+models/*/episodes/.tmp_ep*

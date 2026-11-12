@@ -75,6 +75,8 @@ Artifact: `models/llama_seed_0/validation_performance.txt`.
 
 This proves save and reload work for the Q-learning agent state.
 
+Portability note: TF wrote an absolute path from the training machine into `checkpoints/checkpoint`. The proof above ran on the same machine, where that path still existed. State files are now rewritten relative; see 0037 for a copy that restores itself.
+
 ## Search Policy
 
 Seeds fixed before runs. All runs kept. Highest F1 reported as best-of-N with N and full distribution. No selected-run headline. No prompt/config tuning after seeing validation results.

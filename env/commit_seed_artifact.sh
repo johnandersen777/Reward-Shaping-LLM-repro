@@ -8,9 +8,10 @@ DST="$ROOT/models/llama_seed_$SEED"
 [ -d "$SRC" ] || exit 0
 CKPT_DIR="$(find "$SRC/repo/exp" -type d -name checkpoints -print -quit 2>/dev/null || true)"
 [ -n "$CKPT_DIR" ] || exit 0
-rm -rf "$DST"
-mkdir -p "$DST"
-cp -a "$CKPT_DIR/." "$DST/checkpoints/"
+# Keep models/TAG/episodes/ (per-episode checkpoints committed by the watcher).
+mkdir -p "$DST/checkpoints"
+rsync -a --exclude 'ep[0-9][0-9][0-9][0-9]' "$CKPT_DIR/" "$DST/checkpoints/"
+printf 'model_checkpoint_path: "model"\nall_model_checkpoint_paths: "model"\n' > "$DST/checkpoints/checkpoint"
 for f in meta.json seed_log.json performance.txt llm_potentials.csv run.log; do
   [ -f "$SRC/$f" ] && cp "$SRC/$f" "$DST/$f"
 done

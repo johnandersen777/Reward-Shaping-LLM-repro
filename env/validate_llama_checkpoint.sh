@@ -40,6 +40,9 @@ rsync -a \
 EXP="$DST/repo/exp/A1_LP200_AL1000_d0.96"
 mkdir -p "$EXP/checkpoints"
 cp -a "$MODEL/checkpoints/." "$EXP/checkpoints/"
+# Saved state file holds an absolute path from the machine that trained.
+# Rewrite relative so the copy restores itself.
+printf 'model_checkpoint_path: "model"\nall_model_checkpoint_paths: "model"\n' > "$EXP/checkpoints/checkpoint"
 
 export RSL_SEED="$SEED"
 export RSL_RAW_WINDOWS=1
