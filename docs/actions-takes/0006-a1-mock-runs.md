@@ -59,4 +59,4 @@ cd /home/baptist777/.tmp/tmp.VjJfPBPNr4
 .venv38/bin/python env/summarize_mock_suite.py
 ```
 
-Status seen: h1 22:09, h2 22:12, h3 22:15, h4 22:17. Oracle runs pending. Results pending.
+Status seen: h1-h5 done. Heuristic means: 0.0000, 0.2888, 0.0000, 0.0548, 0.0000. Group mean 0.0687, std 0.1120. Oracle o1 0.1340. o2-o5 running. See `0013-oracle-baseline.md`.

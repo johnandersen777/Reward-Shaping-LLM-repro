@@ -12,3 +12,4 @@
 - [0010 Base Llama EOS](0010-base-llama-eos.md)
 - [0011 Llama Prompt Incompatibility](0011-llama-prompt-incompatibility.md)
 - [0012 Phi-2 Control](0012-phi2-control.md)
+- [0013 Oracle Baseline](0013-oracle-baseline.md)
