@@ -18,6 +18,9 @@ rsync -a \
   "$SRC/" "$DST/repo/"
 "$ROOT/.venv38/bin/python" "$ROOT/env/instrument_checkpoint.py" "$DST/repo/myasp-A1.py"
 "$ROOT/.venv38/bin/python" "$ROOT/env/instrument_training_budget.py" "$DST/repo/myasp-A1.py"
+if [ -n "${RSL_VAE_COEF:-}" ]; then
+  "$ROOT/.venv38/bin/python" "$ROOT/env/instrument_vae_coef.py" "$DST/repo/myasp-A1.py"
+fi
 
 find "$DATA" -maxdepth 1 -name '*.csv' -print0 | sort -z | xargs -0 sha256sum \
   > "$DST/data_manifest.sha256"

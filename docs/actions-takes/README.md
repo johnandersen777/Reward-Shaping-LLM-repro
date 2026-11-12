@@ -28,3 +28,5 @@
 - [0027 Training Budget Grid](0027-training-budget-grid.md)
 - [0028 Budget B Result](0028-budget-b-result.md)
 - [0029 Budget C Result](0029-budget-c-result.md)
+- [0030 Budget Search Summary](0030-budget-search-summary.md)
+- [0031 Budget E Result](0031-budget-e-result.md)
