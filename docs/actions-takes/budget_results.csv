@@ -1,0 +1,5 @@
+tag,config,mean_f1,mean_precision,mean_recall,episodes,max_episode_f1
+budget_b5_e100_d500_s200,B: 5 ep, 100 upd, decay 500,0.485391,0.541711,0.658595,6,0.936170
+budget_b5_e100_d500_s201,B: 5 ep, 100 upd, decay 500,0.000000,0.000000,0.000000,6,0.000000
+budget_b5_e100_d500_s202,B: 5 ep, 100 upd, decay 500,0.151598,0.189316,0.150658,6,0.555556
+budget_c10_e100_d1000_s200,C: 10 ep, 100 upd, decay 1000,0.311500,0.322234,0.325024,6,0.727273
