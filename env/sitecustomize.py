@@ -74,6 +74,45 @@ if _seed_env:
         _random.seed(_seed_value)
         _np.random.seed(_seed_value)
 
+        _seed_log_path = _os.environ.get("RSL_SEED_LOG")
+
+        def _append_seed_log(updates):
+            if not _seed_log_path:
+                return
+            try:
+                import json as _json
+
+                data = {}
+                if _os.path.exists(_seed_log_path):
+                    with open(_seed_log_path) as fh:
+                        data = _json.load(fh)
+                data.update(updates)
+                with open(_seed_log_path, "w") as fh:
+                    _json.dump(data, fh, sort_keys=True, indent=2)
+            except Exception:
+                pass
+
+        import sys as _sys
+
+        _py_state = _random.getstate()
+        _np_state = _np.random.get_state()
+        _append_seed_log(
+            {
+                "seed": _seed_value,
+                "python_hash_seed": _os.environ.get("PYTHONHASHSEED"),
+                "python_version": _sys.version,
+                "python_random_state": list(_py_state[1]),
+                "python_random_gauss_next": _py_state[2],
+                "numpy_random_state": {
+                    "bit_generator": _np_state[0],
+                    "state": _np_state[1].tolist(),
+                    "pos": int(_np_state[2]),
+                    "has_gauss": int(_np_state[3]),
+                    "cached_gaussian": float(_np_state[4]),
+                },
+            }
+        )
+
         import builtins as _builtins
 
         _real_import = _builtins.__import__
@@ -85,6 +124,12 @@ if _seed_env:
                 try:
                     module.compat.v1.set_random_seed(_seed_value)
                     _tf_seeded[0] = True
+                    _append_seed_log(
+                        {
+                            "tensorflow_version": module.__version__,
+                            "tensorflow_graph_seed": _seed_value,
+                        }
+                    )
                 except Exception:
                     pass
             return module

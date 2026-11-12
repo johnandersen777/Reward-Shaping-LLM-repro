@@ -60,6 +60,25 @@ Reports:
 
 No best-run headline. No selected subset.
 
+## Additional Logging
+
+Per seed directory `run/llama_seed_<N>/`:
+
+```text
+meta.json              seed, start/end UTC, host, paper git HEAD, parent git HEAD,
+                       env flags, proxy health + system prompt, package versions,
+                       exit code
+seed_log.json          Python random state, NumPy random state, TF version,
+                       TF graph seed
+data_manifest.sha256   SHA256 of every A1 CSV
+run.log                full stdout/stderr
+performance.txt        per-episode precision, recall, F1
+llm_potentials.csv     unique window -> phi
+repo/                  full run copy and exp outputs
+```
+
+All seeds use the same runner, proxy, system prompt, and raw-window shim. No per-run tuning.
+
 ## Caveats
 
 - Setup differs from paper code: Instruct checkpoint, system message, raw inputs, remote runtime.

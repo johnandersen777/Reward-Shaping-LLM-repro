@@ -146,6 +146,8 @@ def health():
         "remote": REMOTE_BASE_URL,
         "remote_model": REMOTE_MODEL,
         "remote_mode": REMOTE_MODE,
+        "remote_system_prompt": REMOTE_SYSTEM_PROMPT,
+        "remote_api_key_set": bool(REMOTE_API_KEY),
         "log": LOG_PATH,
     }
 
