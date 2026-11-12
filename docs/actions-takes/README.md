@@ -18,3 +18,5 @@
 - [0016 Noisy Oracle Curve](0016-noisy-oracle-curve.md)
 - [0017 Graded vs Binary Phi and F1 Variance](0017-graded-vs-binary-f1-variance.md)
 - [0019 Remote Llama Tests](0019-remote-llama-tests.md)
+- [0020 Llama Judge Calibration](0020-llama-judge-calibration.md)
+- [0021 Fork And Raw-Scale Run](0021-fork-and-raw-run.md)

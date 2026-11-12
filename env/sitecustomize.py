@@ -63,6 +63,26 @@ if _os.environ.get("RSL_PRELOAD_TORCH") == "1":
         pass
 
 
+# Optional raw-window mode: feed min-max values to the LLM judge instead of
+# z-scores. Enabled only when RSL_RAW_WINDOWS=1. Patches llm_shaping after its
+# import/reload; no paper code is edited.
+if _os.environ.get("RSL_RAW_WINDOWS") == "1":
+    try:
+        import importlib as _importlib
+
+        _real_reload = _importlib.reload
+
+        def _reload_for_raw_windows(module):
+            module = _real_reload(module)
+            if getattr(module, "__name__", "") == "llm_shaping":
+                module._normalize_for_prompt = lambda xs: list(xs)
+            return module
+
+        _importlib.reload = _reload_for_raw_windows
+    except Exception:
+        pass
+
+
 # Optional OpenAI 0.28 -> v1-style chat shim for llm_shaping.py.
 # Enabled only when RSL_OPENAI_SHIM=1 so it never affects other Python runs.
 if _os.environ.get("RSL_OPENAI_SHIM") == "1":
