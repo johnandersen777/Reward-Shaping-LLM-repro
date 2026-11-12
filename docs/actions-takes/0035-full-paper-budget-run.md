@@ -61,4 +61,6 @@ Measured 0.79 s/update at 500 updates/episode. 200,000 updates is about 44 to 55
 
 ## Status
 
-Queued after B seed batch (B210). Start is automatic.
+Started 2026-11-12T10:31:48-08:00 after B seed batch (B210). Running.
+
+Paper code saves a checkpoint every 50 episodes under the run exp dir. Final checkpoint also saved by instrumentation.

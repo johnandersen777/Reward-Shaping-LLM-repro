@@ -18,6 +18,7 @@ All completed runs. No filtering.
 | B207 | 0.337709 | 0.6667 |
 | B208 | 0.000000 | 0.0000 |
 | B209 | 0.017144 | 0.0287 |
+| B210 | 0.149562 | 0.5366 |
 | C200 | 0.311500 | 0.7273 |
 | D200 | 0.434827 | 0.6471 |
 | E200 | 0.470956 | 0.7692 |
@@ -28,6 +29,8 @@ Best average: B200 0.485391.
 Runs with average >= 0.76: 0.
 
 Highest per-episode: 0.9362, B200 episode 3. One validation series. Not a headline.
+
+B seeds 200-210 complete: n=11 mean=0.154252 std=0.176613 min=0.0 max=0.485391.
 
 ## Checkpoints
 
@@ -44,6 +47,11 @@ C200 00dc728
 D200 06923fd
 E200 074a7e8
 F200 ec360c0
+B206 a6e8f11
+B207 c76b2ed
+B208 3afab42
+B209 b7e385c
+B210 83e643a
 ```
 
 Reload proof:
@@ -55,7 +63,7 @@ B200 exact F1 match 0.4853906125529526
 
 ## Honest Limit
 
-Current setup tops out near 0.49 average. 0.76 average not reached by 12 runs across 5 configs and 8 B seeds.
+Current setup tops out near 0.49 average. 0.76 average not reached by 17 runs across 5 configs and 11 B seeds.
 
 Per-episode >=0.76 occurs:
 - B200 episode 3: 0.9362
@@ -65,8 +73,15 @@ One series each. Reporting either as the result would be cherry-picking.
 
 ## Next
 
-Fixed B seed extension, declared before runs: 206, 207, 208, 209, 210.
+Full paper budget run, predeclared in 0035:
+
+```text
+paperbudget_e200_u1000_d500000_s200
+200 episodes, 1000 updates, epsilon decay 500000
+```
+
+Started 2026-11-12T10:31:48-08:00. Estimated 44-55 h.
 
 All kept. Best-of-N reported with N. No selected-run headline.
 
-Status: running.
+Status: full budget running.
