@@ -80,12 +80,12 @@ This tests reward plumbing. Not paper performance.
 
 All 25,819 oracle prompts hit lookup. Zero misses.
 
-## Phi-2 pause
+## Phi-2 restart
 
-Phi-2 full run stopped to free CPU for oracle suite. Log: `run/A1_phi2/run.log`. Restart later.
+Oracle suite done. Phi-2 full run restarted in fresh copy `run/A1_phi2/repo`.
 
 ```bash
-cd /home/baptist777/.tmp/tmp.VjJfPBPNr4/run/A1_winorder/repo
+cd /home/baptist777/.tmp/tmp.VjJfPBPNr4/run/A1_phi2/repo
 /home/baptist777/.tmp/tmp.VjJfPBPNr4/env/run_real_a1_phi2.sh \
   > /home/baptist777/.tmp/tmp.VjJfPBPNr4/run/A1_phi2/run.log 2>&1
 ```

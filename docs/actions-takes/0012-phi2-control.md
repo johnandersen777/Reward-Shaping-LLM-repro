@@ -33,10 +33,10 @@ Phi-2 sometimes emits JSON. Zeros window emits code text, parsed 0.0, no fallbac
 
 ## Full A1 Run
 
-Started. Background. Monitor set.
+Fresh copy: `run/A1_phi2/repo`. Started after oracle suite. Background. Monitor set.
 
 ```bash
-cd /home/baptist777/.tmp/tmp.VjJfPBPNr4/run/A1_winorder/repo
+cd /home/baptist777/.tmp/tmp.VjJfPBPNr4/run/A1_phi2/repo
 /home/baptist777/.tmp/tmp.VjJfPBPNr4/env/run_real_a1_phi2.sh \
   > /home/baptist777/.tmp/tmp.VjJfPBPNr4/run/A1_phi2/run.log 2>&1
 ```
@@ -44,6 +44,8 @@ cd /home/baptist777/.tmp/tmp.VjJfPBPNr4/run/A1_winorder/repo
 Log: `run/A1_phi2/run.log`.
 
 Target paper Phi A1 F1: 0.5555. Historical Phi exp mean: 0.3107.
+
+ETA: 6-16 h. About 4,600 cached generations. 5-15 s per call on 4 GB GPU split. CPU canary stopped, so less contention.
 
 Status: running. Results pending.
 
