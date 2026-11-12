@@ -17,3 +17,4 @@
 - [0015 Bonsai MTP Q8](0015-bonsai-mtp-q8.md)
 - [0016 Noisy Oracle Curve](0016-noisy-oracle-curve.md)
 - [0017 Graded vs Binary Phi and F1 Variance](0017-graded-vs-binary-f1-variance.md)
+- [0019 Remote Llama Tests](0019-remote-llama-tests.md)

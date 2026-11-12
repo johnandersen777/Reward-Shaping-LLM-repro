@@ -27,6 +27,10 @@ MODE = os.environ.get("MOCK_MODE", "heuristic")
 ORACLE_FLIP_RATE = float(os.environ.get("ORACLE_FLIP_RATE", "0"))
 ORACLE_NOISE_SEED = os.environ.get("ORACLE_NOISE_SEED", "0")
 LLAMA_CPP_URL = os.environ.get("LLAMA_CPP_URL", "http://127.0.0.1:8770").rstrip("/")
+REMOTE_BASE_URL = os.environ.get("REMOTE_BASE_URL", "").rstrip("/")
+REMOTE_MODEL = os.environ.get("REMOTE_MODEL", "")
+REMOTE_MODE = os.environ.get("REMOTE_MODE", "chat")
+REMOTE_API_KEY = os.environ.get("REMOTE_API_KEY", "")
 ORACLE_PATH = os.environ.get(
     "ORACLE_LOOKUP",
     os.path.join(os.path.dirname(os.path.abspath(__file__)), "oracle_lookup.pkl"),
@@ -98,9 +102,48 @@ def call_llama_cpp(messages):
     return content, data
 
 
+def call_remote_openai(prompt, messages):
+    headers = {}
+    if REMOTE_API_KEY:
+        headers["Authorization"] = "Bearer " + REMOTE_API_KEY
+    if REMOTE_MODE == "completion":
+        url = REMOTE_BASE_URL + "/completions"
+        payload = {
+            "model": REMOTE_MODEL,
+            "prompt": prompt,
+            "temperature": 0.0,
+            "max_tokens": 32,
+            "stream": False,
+        }
+    else:
+        url = REMOTE_BASE_URL + "/chat/completions"
+        payload = {
+            "model": REMOTE_MODEL,
+            "messages": messages,
+            "temperature": 0.0,
+            "max_tokens": 32,
+        }
+    resp = requests.post(url, json=payload, headers=headers, timeout=600)
+    resp.raise_for_status()
+    data = resp.json()
+    if REMOTE_MODE == "completion":
+        content = data["choices"][0].get("text") or ""
+    else:
+        content = data["choices"][0]["message"].get("content") or ""
+    return content, data
+
+
 @app.get("/health")
 def health():
-    return {"status": "ok", "mode": MODE, "backend": LLAMA_CPP_URL, "log": LOG_PATH}
+    return {
+        "status": "ok",
+        "mode": MODE,
+        "backend": LLAMA_CPP_URL,
+        "remote": REMOTE_BASE_URL,
+        "remote_model": REMOTE_MODEL,
+        "remote_mode": REMOTE_MODE,
+        "log": LOG_PATH,
+    }
 
 
 @app.get("/v1/models")
@@ -132,6 +175,10 @@ async def chat_completions(request: Request):
     if MODE == "llama_cpp":
         t0 = time.time()
         content, backend = call_llama_cpp(messages)
+        backend_ms = round((time.time() - t0) * 1000.0, 1)
+    elif MODE == "remote_openai":
+        t0 = time.time()
+        content, backend = call_remote_openai(prompt, messages)
         backend_ms = round((time.time() - t0) * 1000.0, 1)
     elif MODE == "noisy_oracle":
         text = canonical_sequence(prompt)
