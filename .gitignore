@@ -10,3 +10,4 @@ mock_llm/oracle_lookup.pkl
 __pycache__/
 src/
 tools/
+llama-cuda12libs/

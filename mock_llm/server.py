@@ -12,6 +12,7 @@ import pickle
 import re
 import time
 
+import requests
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
@@ -22,6 +23,7 @@ LOG_PATH = os.environ.get(
     os.path.join(os.path.dirname(os.path.abspath(__file__)), "requests.jsonl"),
 )
 MODE = os.environ.get("MOCK_MODE", "heuristic")
+LLAMA_CPP_URL = os.environ.get("LLAMA_CPP_URL", "http://127.0.0.1:8770").rstrip("/")
 ORACLE_PATH = os.environ.get(
     "ORACLE_LOOKUP",
     os.path.join(os.path.dirname(os.path.abspath(__file__)), "oracle_lookup.pkl"),
@@ -63,9 +65,23 @@ def log_record(record):
         fh.write(json.dumps(record, sort_keys=True) + "\n")
 
 
+def call_llama_cpp(messages):
+    payload = {
+        "messages": messages,
+        "temperature": 0.0,
+        "max_tokens": 32,
+        "chat_template_kwargs": {"enable_thinking": False},
+    }
+    resp = requests.post(LLAMA_CPP_URL + "/v1/chat/completions", json=payload, timeout=600)
+    resp.raise_for_status()
+    data = resp.json()
+    content = data["choices"][0]["message"].get("content") or ""
+    return content, data
+
+
 @app.get("/health")
 def health():
-    return {"status": "ok", "log": LOG_PATH}
+    return {"status": "ok", "mode": MODE, "backend": LLAMA_CPP_URL, "log": LOG_PATH}
 
 
 @app.get("/v1/models")
@@ -91,17 +107,25 @@ async def chat_completions(request: Request):
     prompt = "\n".join(str(m.get("content", "")) for m in messages)
     values = parse_sequence(prompt)
     hit = None
-    if MODE == "oracle":
-        text = canonical_sequence(prompt)
-        if text in _ORACLE:
-            severity = float(_ORACLE[text])
-            hit = True
+    severity = None
+    backend_ms = None
+    if MODE == "llama_cpp":
+        t0 = time.time()
+        content, backend = call_llama_cpp(messages)
+        backend_ms = round((time.time() - t0) * 1000.0, 1)
+    else:
+        if MODE == "oracle":
+            text = canonical_sequence(prompt)
+            if text in _ORACLE:
+                severity = float(_ORACLE[text])
+                hit = True
+            else:
+                severity = mock_severity(values)
+                hit = False
         else:
             severity = mock_severity(values)
-            hit = False
-    else:
-        severity = mock_severity(values)
-    content = json.dumps({"severity": severity})
+        content = json.dumps({"severity": severity})
+        backend = None
 
     log_record(
         {
@@ -112,6 +136,8 @@ async def chat_completions(request: Request):
             "n_values": len(values),
             "max_abs": max((abs(v) for v in values), default=None),
             "severity": severity,
+            "backend_ms": backend_ms,
+            "content_prefix": content[:80],
             "prompt_chars": len(prompt),
         }
     )
