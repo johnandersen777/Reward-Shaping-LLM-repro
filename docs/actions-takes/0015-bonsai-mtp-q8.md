@@ -113,6 +113,19 @@ env/run_real_a1_bonsai.sh > /home/baptist777/.tmp/tmp.VjJfPBPNr4/run/A1_bonsai/r
 
 Status: running. Results pending.
 
+## Smoke Test
+
+Seen:
+
+```text
+SMOKE TEST shaped rewards: [-0.03, -0.03] [-0.03, -0.03]
+llm_logs: phi(s)=0.75, phi(s2)=0.75
+```
+
+`0.96*0.75 - 0.75 = -0.03`. Matches. Warm-up started.
+
+Backend latency: mean 641 ms over first calls.
+
 ## Experiment Change
 
 Code path is now OpenAI-compatible proxy, not local HF raw pipeline. Chat template wraps the user message. Prompt text inside the message unchanged. This is a wrapper change, required by the requested GGUF model. Note 3 forbids wrapper changes. Documented, user-directed.
