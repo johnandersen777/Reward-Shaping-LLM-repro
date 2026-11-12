@@ -82,10 +82,10 @@ All 25,819 oracle prompts hit lookup. Zero misses.
 
 ## Phi-2 restart
 
-Oracle suite done. Phi-2 full run restarted in fresh copy `run/A1_phi2/repo`.
+Oracle suite done. Phi-2 full run restarted. Runner default path: `run/A1_winorder/repo`. Log: `run/A1_phi2/run.log`.
 
 ```bash
-cd /home/baptist777/.tmp/tmp.VjJfPBPNr4/run/A1_phi2/repo
-/home/baptist777/.tmp/tmp.VjJfPBPNr4/env/run_real_a1_phi2.sh \
+cd /home/baptist777/.tmp/tmp.VjJfPBPNr4
+env/run_real_a1_phi2.sh /home/baptist777/.tmp/tmp.VjJfPBPNr4/run/A1_winorder/repo \
   > /home/baptist777/.tmp/tmp.VjJfPBPNr4/run/A1_phi2/run.log 2>&1
 ```
