@@ -65,6 +65,18 @@ Reason: Llama-Instruct has published anomaly-label F1 around 0.54-0.59 and is in
 
 But: our exact prompt tests show both over-flag. Paper Llama F1 0.7413 remains unreproduced. Paper says system-level JSON instructions; public code has no system role. Paper never states base vs instruct. Repo conflict: code path base, README example Instruct.
 
+## Comparability
+
+Paper Llama row and Bonsai row differ in:
+
+- model family and size,
+- precision and quantization (fp16 vs ternary 2-bit + Q8_0 MTP),
+- runtime (HF transformers vs PrismML llama.cpp),
+- prompt wrapping (raw completion vs chat template),
+- training randomness (no seeds).
+
+F1 values are not directly comparable. Same code and data, different judge.
+
 ## Bottom line
 
 More capable model: Bonsai-2-9B.

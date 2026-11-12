@@ -31,6 +31,7 @@ REMOTE_BASE_URL = os.environ.get("REMOTE_BASE_URL", "").rstrip("/")
 REMOTE_MODEL = os.environ.get("REMOTE_MODEL", "")
 REMOTE_MODE = os.environ.get("REMOTE_MODE", "chat")
 REMOTE_API_KEY = os.environ.get("REMOTE_API_KEY", "")
+REMOTE_SYSTEM_PROMPT = os.environ.get("REMOTE_SYSTEM_PROMPT", "")
 ORACLE_PATH = os.environ.get(
     "ORACLE_LOOKUP",
     os.path.join(os.path.dirname(os.path.abspath(__file__)), "oracle_lookup.pkl"),
@@ -117,9 +118,12 @@ def call_remote_openai(prompt, messages):
         }
     else:
         url = REMOTE_BASE_URL + "/chat/completions"
+        send_messages = messages
+        if REMOTE_SYSTEM_PROMPT:
+            send_messages = [{"role": "system", "content": REMOTE_SYSTEM_PROMPT}] + list(messages)
         payload = {
             "model": REMOTE_MODEL,
-            "messages": messages,
+            "messages": send_messages,
             "temperature": 0.0,
             "max_tokens": 32,
         }

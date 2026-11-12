@@ -64,6 +64,43 @@ anomaly windows -> 0.95
 
 No discrimination. All tested real windows scored 0.95.
 
+## System Prompt And Full Run
+
+System message injected by proxy:
+
+```text
+You are an anomaly severity judge. Return ONLY JSON {"severity": s} with s in [0.0,1.0]. Never write code.
+```
+
+Proxy:
+
+```bash
+cd /home/baptist777/.tmp/tmp.VjJfPBPNr4
+REMOTE_BASE_URL=http://192.168.0.20:8001/v1 \
+REMOTE_MODEL=llama-3.2-3b-instruct \
+REMOTE_MODE=chat \
+REMOTE_SYSTEM_PROMPT='You are an anomaly severity judge. Return ONLY JSON {"severity": s} with s in [0.0,1.0]. Never write code.' \
+env/start_remote_proxy.sh
+```
+
+Canary with system prompt:
+
+```text
+zeros -> {"severity": 0.00}
+spike -> {"severity": 0.95}
+```
+
+Full A1 run:
+
+```bash
+cd /home/baptist777/.tmp/tmp.VjJfPBPNr4
+env/run_real_a1_remote.sh > run/A1_remote_llama/run.log 2>&1
+```
+
+Repo: `run/A1_remote_llama/repo`. Log: `run/A1_remote_llama/run.log`.
+
+Status: running. Results pending. Wrapper change: system role added. User-directed.
+
 ## Conclusion
 
 - Base Llama raw: unusable, fallback.
