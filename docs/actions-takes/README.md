@@ -10,3 +10,4 @@
 - [0008 Historical Artifacts](0008-historical-artifacts.md)
 - [0009 Git Workflow](0009-git-workflow.md)
 - [0010 Base Llama EOS](0010-base-llama-eos.md)
+- [0011 Llama Prompt Incompatibility](0011-llama-prompt-incompatibility.md)
