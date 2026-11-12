@@ -14,6 +14,14 @@ Contains one doc commit: `REPRO_SETUP.md` linking parent repo. No paper code edi
 
 Parent submodule pointer updated to `691b8b8`.
 
+`.gitmodules` URL updated to fork:
+
+```text
+https://github.com/johnandersen777/Reward-Shaping-LLM.git
+```
+
+Parent commit: `b3d8ab3`. Submodule status: `691b8b8 (heads/repro-setup)`.
+
 Parent repro repo:
 
 ```text
