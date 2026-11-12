@@ -8,6 +8,10 @@ BIN="${BIN:-$HOME/llama.cpp-prism/llama-prism-b10776-d00e252/llama-server}"
 if [ ! -x "$BIN" ]; then
   BIN="$(find "$HOME/llama.cpp-prism" -type f -name llama-server | head -1)"
 fi
+EXTRA=()
+if [ -n "${CACHE_REUSE:-}" ]; then
+  EXTRA+=(--cache-reuse "$CACHE_REUSE")
+fi
 exec "$BIN" \
   -m "$MODEL" \
   -ngl 99 -fa on \
@@ -15,4 +19,4 @@ exec "$BIN" \
   -c 2048 -t 8 \
   --host 127.0.0.1 --port "${PORT:-8770}" \
   --no-webui \
-  --temp 0.0 --top-k 1 --top-p 1.0
+  --temp 0.0 --top-k 1 --top-p 1.0 "${EXTRA[@]}"
