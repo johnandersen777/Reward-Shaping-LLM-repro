@@ -174,6 +174,30 @@ window 100  0.188157  worse
 
 Single seed each. Best is still B200 0.485391, far from 0.76.
 
+## Proxy daemons
+
+Proxies now run detached with `setsid nohup`, so the harness memory reaper cannot kill them. External qemu VM uses 16 GB on this host; pressure is not ours.
+
+Restart one, example port 8772:
+
+```bash
+cd /home/baptist777/.tmp/tmp.VjJfPBPNr4/mock_llm
+setsid nohup env MOCK_MODE=remote_openai REMOTE_MODE=chat \
+  REMOTE_BASE_URL=http://192.168.0.20:8001/v1 \
+  REMOTE_MODEL=llama-3.2-3b-instruct REMOTE_API_KEY= \
+  REMOTE_SYSTEM_PROMPT='You are an anomaly severity judge. Return ONLY JSON {"severity": s} with s in [0.0,1.0]. Never write code.' \
+  MOCK_LLM_LOG=/home/baptist777/.tmp/tmp.VjJfPBPNr4/mock_llm/remote_llama_instruct_system.jsonl \
+  /home/baptist777/.tmp/tmp.VjJfPBPNr4/.venv38/bin/python -m uvicorn server:app \
+  --host 127.0.0.1 --port 8772 --log-level warning \
+  > /home/baptist777/.tmp/tmp.VjJfPBPNr4/run/proxy8772_daemon.log 2>&1 < /dev/null &
+```
+
+Check:
+
+```bash
+curl -sf http://127.0.0.1:8772/health
+```
+
 ## How to avoid repeat
 
 - One proxy per active test group, not shared by all.
