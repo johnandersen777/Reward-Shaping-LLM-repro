@@ -145,6 +145,35 @@ win100v2_b5_e100_d500_s200
 
 Same config and seed as control. Three parallel. Check `LLM call failed` in each log before trusting results.
 
+## Window results
+
+Reruns finished clean, zero LLM call failures.
+
+| Tag | LLM window | Mean F1 |
+| --- | ---: | ---: |
+| B200 control | 25 | 0.485391 |
+| win10v2 | 10 | 0.354223 |
+| win50v2 | 50 | 0.485405 |
+| win100v2 | 100 | 0.188157 |
+
+Window 50 matches control within 0.000014. Window 10 and 100 worse. No improvement from window size.
+
+Artifacts: `e8d2e8f` win10v2, `3924240` win50v2, `d4b5652` win100v2.
+
+## Conclusion
+
+Neither lever helps at this budget and seed.
+
+```text
+prompt S1   0.214188  worse
+prompt S2   0.191197  worse
+window 10   0.354223  worse
+window 50   0.485405  neutral
+window 100  0.188157  worse
+```
+
+Single seed each. Best is still B200 0.485391, far from 0.76.
+
 ## How to avoid repeat
 
 - One proxy per active test group, not shared by all.
