@@ -119,6 +119,32 @@ Prompt runs S1/S2 use proxies 8773 and 8774. Those stayed healthy. Zero LLM call
 
 Main full budget run: zero LLM call failures in the log at 10:09. Cache served repeated windows. Continue monitoring; any fallback line invalidates that span.
 
+## Prompt results
+
+Both prompt runs finished clean, zero LLM call failures.
+
+| Tag | Prompt | Mean F1 |
+| --- | --- | ---: |
+| B200 control | current system prompt | 0.485391 |
+| prompt_s1 | judge whole window | 0.214188 |
+| prompt_s2 | focus last value | 0.191197 |
+
+Both variants far below control. Single seed each, so screen only. Direction: worse, no reason to promote either prompt.
+
+Artifacts committed: `63f4b96` S1, `2648eaf` S2.
+
+## Window rerun
+
+Restarted after proxy fix with new tags:
+
+```text
+win10v2_b5_e100_d500_s200
+win50v2_b5_e100_d500_s200
+win100v2_b5_e100_d500_s200
+```
+
+Same config and seed as control. Three parallel. Check `LLM call failed` in each log before trusting results.
+
 ## How to avoid repeat
 
 - One proxy per active test group, not shared by all.
