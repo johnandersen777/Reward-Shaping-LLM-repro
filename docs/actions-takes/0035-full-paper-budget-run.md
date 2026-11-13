@@ -65,19 +65,26 @@ Started 2026-11-12T10:31:48-08:00 after B seed batch (B210). Running.
 
 Paper code saves a checkpoint every 50 episodes under the run exp dir. Final checkpoint also saved by instrumentation.
 
-## Intermediate result
+## Intermediate results
 
-Episode 49 checkpoint, 49 of 200 episodes trained. Snapshot validated restore-only. Checkpoint commit `698f831`.
+Snapshots validated restore-only.
 
-| Episode | F1 |
-| --- | ---: |
-| 1 | 0.1277 |
-| 2 | 0.6531 |
-| 3 | 0.5882 |
-| 4 | 0.4444 |
-| 5 | 0.5263 |
-| 6 | 0.2857 |
+| Episode | Mean F1 | Max series | Commit |
+| --- | ---: | ---: | --- |
+| 49 | 0.437572 | 0.6531 | `698f831` |
+| 99 | 0.405053 | 0.6552 | `93432c8` |
 
-Mean F1 0.437572. Max episode 0.6531.
+Per series:
 
-Below B200 average 0.485391. Not final. 151 episodes remain. No run average reaches 0.76 yet.
+| Series | ep49 F1 | ep99 F1 |
+| --- | ---: | ---: |
+| 1 | 0.1277 | 0.0370 |
+| 2 | 0.6531 | 0.6552 |
+| 3 | 0.5882 | 0.5500 |
+| 4 | 0.4444 | 0.3670 |
+| 5 | 0.5263 | 0.4878 |
+| 6 | 0.2857 | 0.3333 |
+
+Mean dropped 0.0325 from episode 49 to 99. No improvement from training longer so far.
+
+Both below B200 average 0.485391. Not final. 101 episodes remain. No run average reaches 0.76.
