@@ -21,6 +21,9 @@ rsync -a \
 if [ -n "${RSL_VAE_COEF:-}" ]; then
   "$ROOT/.venv38/bin/python" "$ROOT/env/instrument_vae_coef.py" "$DST/repo/myasp-A1.py"
 fi
+if [ -n "${RSL_LLM_WINDOW:-}" ]; then
+  "$ROOT/.venv38/bin/python" "$ROOT/env/instrument_llm_window.py" "$DST/repo/myasp-A1.py"
+fi
 
 find "$DATA" -maxdepth 1 -name '*.csv' -print0 | sort -z | xargs -0 sha256sum \
   > "$DST/data_manifest.sha256"
@@ -45,7 +48,7 @@ def ver(n):
 def head(p):
     try: return subprocess.check_output(["git","-C",p,"rev-parse","HEAD"],text=True).strip()
     except Exception as e: return f"error: {e}"
-try: proxy = requests.get("http://127.0.0.1:8772/health", timeout=5).json()
+try: proxy = requests.get("http://127.0.0.1:%s/health" % os.environ.get("PROXY_PORT", "8772"), timeout=5).json()
 except Exception as e: proxy = {"error": str(e)}
 meta = {
  "tag": tag, "seed": int(seed),
@@ -53,7 +56,7 @@ meta = {
  "host": os.uname().nodename,
  "paper_git_head": head(src), "parent_git_head": head(root),
  "budget": {"episodes": int(ep), "epoches": int(epochs), "eps_decay": int(decay)},
- "env": {k: os.environ.get(k) for k in ["RSL_SEED","RSL_RAW_WINDOWS","RSL_NUM_EPISODES","RSL_NUM_EPOCHES","RSL_EPS_DECAY","PYTHONHASHSEED","OMP_NUM_THREADS","OPENAI_BASE_URL","LLM_CHOICE"]},
+ "env": {k: os.environ.get(k) for k in ["RSL_SEED","RSL_RAW_WINDOWS","RSL_NUM_EPISODES","RSL_NUM_EPOCHES","RSL_EPS_DECAY","RSL_LLM_WINDOW","PYTHONHASHSEED","OMP_NUM_THREADS","OPENAI_BASE_URL","LLM_CHOICE"]},
  "proxy_health": proxy,
  "versions": {n: ver(n) for n in ["numpy","pandas","scipy","scikit-learn","tensorflow-cpu","torch","transformers","accelerate","openai"]},
 }
