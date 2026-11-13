@@ -10,9 +10,13 @@ RUN="$ROOT/run/$TAG"
 MODEL="$ROOT/models/$SNAP"
 LOG="$RUN/intermediate_validate.log"
 mkdir -p "$RUN"
-echo "waiting for $TAG checkpoint $(date -Is)" >> "$LOG"
-until ls "$RUN"/repo/exp/*/checkpoints/model.index >/dev/null 2>&1; do sleep 30; done
-CKPT_DIR="$(dirname "$(ls "$RUN"/repo/exp/*/checkpoints/model.index | head -1)")"
+echo "waiting for $TAG checkpoint newer than $(date -Is)" >> "$LOG"
+START_TS="$(date +%s)"
+until f="$(ls "$RUN"/repo/exp/*/checkpoints/model.index 2>/dev/null | head -1)" \
+      && [ -n "$f" ] && [ "$(stat -c %Y "$f")" -gt "$START_TS" ]; do
+  sleep 30
+done
+CKPT_DIR="$(dirname "$f")"
 mkdir -p "$MODEL/checkpoints"
 cp -a "$CKPT_DIR/model.data-00000-of-00001" "$CKPT_DIR/model.index" "$MODEL/checkpoints/"
 printf 'model_checkpoint_path: "model"\nall_model_checkpoint_paths: "model"\n' > "$MODEL/checkpoints/checkpoint"
