@@ -127,6 +127,14 @@ Applied to run copies made after 2026-11-12T14:20-08:00.
 
 Running full budget run `paperbudget_e200_u1000_d500000_s200` started before the change. It keeps paper's 50-episode checkpoints only.
 
+Snapshot and validate the first one without stopping training:
+
+```bash
+env/validate_intermediate_checkpoint.sh paperbudget_e200_u1000_d500000_s200 paperbudget_e200_u1000_d500000_s200_ep49
+```
+
+Run in background. Waits for `checkpoints/model.index`, copies to `models/<snapshot>/`, validates, commits and pushes. Snapshot tag separate so the final artifact commit does not overwrite it.
+
 ## Test
 
 Staged copy of B200 final checkpoint as fake `ep0001` and `ep0002` for tag `test_epcheckpoint`.
