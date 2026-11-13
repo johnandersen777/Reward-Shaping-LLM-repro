@@ -64,3 +64,20 @@ Measured 0.79 s/update at 500 updates/episode. 200,000 updates is about 44 to 55
 Started 2026-11-12T10:31:48-08:00 after B seed batch (B210). Running.
 
 Paper code saves a checkpoint every 50 episodes under the run exp dir. Final checkpoint also saved by instrumentation.
+
+## Intermediate result
+
+Episode 49 checkpoint, 49 of 200 episodes trained. Snapshot validated restore-only. Checkpoint commit `698f831`.
+
+| Episode | F1 |
+| --- | ---: |
+| 1 | 0.1277 |
+| 2 | 0.6531 |
+| 3 | 0.5882 |
+| 4 | 0.4444 |
+| 5 | 0.5263 |
+| 6 | 0.2857 |
+
+Mean F1 0.437572. Max episode 0.6531.
+
+Below B200 average 0.485391. Not final. 151 episodes remain. No run average reaches 0.76 yet.
