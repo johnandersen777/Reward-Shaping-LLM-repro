@@ -91,4 +91,36 @@ Window instrumentation is a run-copy change, not paper repo. Paper repo stays at
 
 ## Status
 
-Started 2026-11-13T08:52-08:00. Five runs in parallel with full budget run. Results appended when done.
+Started 2026-11-13T08:52-08:00. Five runs in parallel with full budget run.
+
+## Interruption
+
+About 09:22 the 8772 proxy was killed by the Claude Code low-memory reaper while the session was idle. Restart was delayed; first restart hung on startup and was replaced at 10:09.
+
+Window runs fell back to `_heuristic_phi`:
+
+```text
+win10   1997 LLM call failures
+win50   1995 LLM call failures
+win100  1993 LLM call failures
+```
+
+All three stopped 10:08. Results invalid. Logs kept for disclosure:
+
+```text
+models/INVALID_win10_b5_e100_d500_s200/
+models/INVALID_win50_b5_e100_d500_s200/
+models/INVALID_win100_b5_e100_d500_s200/
+```
+
+Window axis must rerun with proxy stable.
+
+Prompt runs S1/S2 use proxies 8773 and 8774. Those stayed healthy. Zero LLM call failures. Still running.
+
+Main full budget run: zero LLM call failures in the log at 10:09. Cache served repeated windows. Continue monitoring; any fallback line invalidates that span.
+
+## How to avoid repeat
+
+- One proxy per active test group, not shared by all.
+- Check `curl -sf http://127.0.0.1:PORT/health` after any restart, before trusting runs.
+- Watch for `LLM call failed` lines in every run log.
